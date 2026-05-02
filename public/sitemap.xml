@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:8975/categories/</loc>
+    <loc>https://bamshi.dev/categories/</loc>
   </url><url>
-    <loc>http://localhost:8975/tags/</loc>
+    <loc>https://bamshi.dev/tags/</loc>
   </url><url>
-    <loc>http://localhost:8975/</loc>
+    <loc>https://bamshi.dev/</loc>
   </url>
 </urlset>
