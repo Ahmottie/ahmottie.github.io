@@ -1,0 +1,20 @@
+baseURL = 'https://bamshi.dev/'
+languageCode = 'en-us'
+title = 'Bamshi | Dev Portfolio'
+theme = 'risotto'
+
+[params]
+    firstName = "Ahmottie"
+    lastName = "Bamshi"
+    description = "Software Developer | Java, Python, R"
+    palette = "circus"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "Projects"
+    url = "/projects/"
+    weight = 20
