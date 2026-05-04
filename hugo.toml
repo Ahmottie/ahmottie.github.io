@@ -1,4 +1,4 @@
-baseURL = 'https://bamshi.dev/'
+baseURL = "[https://bamshi.dev/](https://bamshi.dev/)"
 languageCode = 'en-us'
 title = 'Bamshi | Dev Portfolio'
 theme = 'risotto'
