@@ -119,18 +119,20 @@
         <div class="contact-container" data-aos="fade-up">
           <div class="contact-card">
             <h2>> Send a Message</h2>
-            <form action="https://formspree.io/f/your-id-here" method="POST" class="contact-form">
+            <!-- Updated Form for Vercel Serverless Function -->
+            <form id="contactForm" class="contact-form">
               <div class="form-group">
-                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="text" id="name" name="name" placeholder="Your Name" required />
               </div>
               <div class="form-group">
-                <input type="email" name="email" placeholder="Your Email" required />
+                <input type="email" id="email" name="email" placeholder="Your Email" required />
               </div>
               <div class="form-group">
-                <textarea name="message" placeholder="How can I help you?" rows="5" required></textarea>
+                <textarea id="message" name="message" placeholder="How can I help you?" rows="5" required></textarea>
               </div>
               <button type="submit" class="hero-button form-submit">Send Message</button>
             </form>
+            <div id="formResponse" style="margin-top: 10px; font-size: 14px; min-height: 20px;"></div>
 
             <hr class="form-divider" style="margin: 20px 0; opacity: 0.3;" />
 
@@ -142,9 +144,9 @@
               <a href="https://github.com/Ahmottie" target="_blank" rel="noopener noreferrer">
                 <img class="contact-icons" src="./assets/icons/github-icon.svg" alt="GitHub" /> GitHub
               </a>
-              <!-- Fixed Gmail Link -->
-              <a href="mailto:amirhosseinmottie@gmail.com">
-                <img class="contact-icons" src="./assets/icons/mail.svg" alt="Gmail" /> Gmail
+              <!-- Professional Forwarding Link -->
+              <a href="mailto:hello@bamshi.dev">
+                <img class="contact-icons" src="./assets/icons/mail.svg" alt="Email" /> hello@bamshi.dev
               </a>
             </div>
           </div>

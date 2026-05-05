@@ -25,3 +25,34 @@ navToggle.addEventListener("click", () => {
     }
   });
 });
+
+const contactForm = document.getElementById('contactForm');
+const formResponse = document.getElementById('formResponse');
+
+contactForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  formResponse.innerText = "Sending...";
+
+  const formData = {
+    name: document.getElementById('name').value,
+    email: document.getElementById('email').value,
+    message: document.getElementById('message').value,
+  };
+
+  try {
+    const response = await fetch('/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      formResponse.innerText = "Message sent successfully!";
+      contactForm.reset();
+    } else {
+      formResponse.innerText = "Something went wrong. Please try again.";
+    }
+  } catch (err) {
+    formResponse.innerText = "Error connecting to server.";
+  }
+});
