@@ -1,13 +1,19 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
+export default function handler(req, res) {
+  // Check if the method is POST
+  if (req.method === 'POST') {
+    const { name, email, message } = req.body;
+
+    // Log to Vercel console for debugging
+    console.log("Form Data Received:", { name, email, message });
+
+    // Respond with a 200 Success code
+    return res.status(200).json({
+      success: true,
+      message: 'Connection established with Vercel backend.'
+    });
+  } else {
+    // If someone tries to visit the link directly (GET), return 405
+    res.setHeader('Allow', ['POST']);
+    return res.status(405).json({ message: `Method ${req.method} Not Allowed` });
   }
-
-  const { name, email, message } = req.body;
-
-  // Logic to send email would go here using your chosen API key.
-  // For now, we'll simulate a success.
-  console.log(`New message from ${name}: ${message}`);
-
-  return res.status(200).json({ message: 'Success' });
 }
