@@ -33,7 +33,7 @@
   </head>
   <body>
     <header>
-<nav class="navbar-nav">
+      <nav class="navbar-nav">
         <div class="nav-logo">
           <a href="#">
             <img src="./assets/images/Github_logo.png" alt="Bamshi Logo" class="custom-logo" />
@@ -55,7 +55,8 @@
       </nav>
     </header>
 
-<!-- Hero Section -->
+    <main>
+      <!-- Hero Section -->
       <section id="hero">
         <div class="hero-container">
           <div class="hero-text-container" data-aos="fade-up">
@@ -67,8 +68,6 @@
           <!-- button container -->
           <div data-aos="fade-up" style="display: flex; gap: 15px; margin-top: 20px;">
             <a href="#contact" class="hero-button">Let's connect!</a>
-
-            <!-- Download CV Button -->
             <a href="https://drive.google.com/file/d/1Qkm9ZNIzQmVlJ516em4m8l0sgZK1VJF7/view?usp=sharing" download="Amirhossein_Mottie_CV.pdf" class="hero-button">Download CV</a>
           </div>
         </div>
@@ -95,17 +94,13 @@
           <div class="portfolio-card">
             <div class="portfolio-content">
               <h2>> Portfolio</h2>
-
               <div class="project-container">
                 <!-- Project: Memory Game -->
                 <section class="project-card">
                   <img class="project-img" src="./assets/images/memory-game.png" alt="Memory Game Preview" />
-
                   <h3>Coffee Break Games: Memory Game</h3>
                   <h5>Retro 2D Memory Game | Software Development</h5>
-
                   <p>Interactive memory matching game. Built with a focus on game logic, pattern designs, and Requirement Engineering.</p>
-
                   <div class="project-card-links">
                     <a href="https://github.com/Ahmottie/Coffee-Break-Games---Memory-Game" target="_blank" rel="noopener noreferrer">
                       <img class="project-icons" src="./assets/icons/github-icon.svg" alt="Repository" /> Repository
@@ -119,27 +114,37 @@
       </section>
 
       <!-- Contact Section -->
-<!-- Contact Section -->
       <section id="contact">
         <h2 class="section-highlight" data-aos="fade-up">Contacts</h2>
         <div class="contact-container" data-aos="fade-up">
           <div class="contact-card">
-            <h2>> Contacts</h2>
-            <p>You can contact me directly through the following platforms:</p>
+            <h2>> Send a Message</h2>
+            <form action="https://formspree.io/f/your-id-here" method="POST" class="contact-form">
+              <div class="form-group">
+                <input type="text" name="name" placeholder="Your Name" required />
+              </div>
+              <div class="form-group">
+                <input type="email" name="email" placeholder="Your Email" required />
+              </div>
+              <div class="form-group">
+                <textarea name="message" placeholder="How can I help you?" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="hero-button form-submit">Send Message</button>
+            </form>
 
+            <hr class="form-divider" style="margin: 20px 0; opacity: 0.3;" />
+
+            <p>Or reach out directly via:</p>
             <div class="contact-links">
-              <!-- LinkedIn Button -->
               <a href="https://www.linkedin.com/in/amirhossein-mottie-108798324/" target="_blank" rel="noopener noreferrer">
                 <img class="contact-icons" src="./assets/icons/linkedin-icon.svg" alt="LinkedIn" /> LinkedIn
               </a>
-
-              <!-- GitHub Button -->
               <a href="https://github.com/Ahmottie" target="_blank" rel="noopener noreferrer">
                 <img class="contact-icons" src="./assets/icons/github-icon.svg" alt="GitHub" /> GitHub
               </a>
-              <!-- Email Button -->
+              <!-- Fixed Gmail Link -->
               <a href="mailto:amirhosseinmottie@gmail.com">
-                <img class="contact-icons" src="./assets/icons/mail.svg" alt="Email" /> Email Me
+                <img class="contact-icons" src="./assets/icons/mail.svg" alt="Gmail" /> Gmail
               </a>
             </div>
           </div>

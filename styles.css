@@ -418,6 +418,45 @@ section {
   aspect-ratio: 1;
 }
 
+/* Contact Form Styling */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--accent-2);
+  color: var(--primary-color);
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--accent-1);
+  box-shadow: 0 0 5px var(--accent-1);
+}
+
+.form-submit {
+  cursor: pointer;
+  width: 100%; /* Makes it easier to tap on mobile */
+  text-align: center;
+}
+
+.form-divider {
+  margin: 20px 0;
+  border: 0;
+  border-top: 1px solid var(--accent-1);
+  opacity: 0.3;
+}
+
 /* extras */
 .section-highlight {
   font-size: 4rem;
