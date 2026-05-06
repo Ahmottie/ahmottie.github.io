@@ -1,17 +1,7 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react-swc";
-import { TanStackRouterVite } from "@tanstack/router-plugin/vite";
-import tailwindcss from "@tailwindcss/vite";
-import path from "path";
+import { tanstackStart } from "@tanstack/start/vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig({
-  plugins: [TanStackRouterVite(), react(), tailwindcss()],
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src"),
-    },
-  },
-  build: {
-    outDir: ".output", // Matches the Vercel output directory setting we discussed
-  },
+  plugins: [tsconfigPaths(), tanstackStart()],
 });
