@@ -8,7 +8,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "About Amir — a passionate Computer Scientist focused on Software Engineering, AI, Data Analysis, and Automation.",
+          "Hey there, I'm still updating my website. For now you can check out my CV, LinkedIn profile, and GitHub for more information.",
       },
       { property: "og:title", content: "about — Amir" },
       { property: "og:description", content: "About Amir — a passionate Computer Scientist." },
