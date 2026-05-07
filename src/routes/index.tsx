@@ -6,11 +6,11 @@ import logo from "@/assets/logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Amir — Computer Scientist" },
+      { title: "UNDER CONSTRUCTION — Computer Scientist" },
       {
         name: "description",
         content:
-          "Hey there, I'm Amir — a passionate Computer Scientist working on Software Engineering, AI, Data Analysis, and Automation.",
+          "Hey there, I'm still updating my website. For now you can check out my CV, LinkedIn profile, and GitHub for more information.",
       },
       { property: "og:title", content: "Amir — Computer Scientist" },
       {
