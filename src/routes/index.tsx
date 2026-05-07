@@ -6,7 +6,7 @@ import logo from "@/assets/logo.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "UNDER CONSTRUCTION — Computer Scientist" },
+      { title: "UNDER CONSTRUCTION" },
       {
         name: "description",
         content:

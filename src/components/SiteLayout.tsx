@@ -36,9 +36,8 @@ export function SiteLayout({ children }: { children?: ReactNode }) {
       </header>
       <main className="flex-1 px-6 md:px-10 py-10">
         <div className="max-w-5xl mx-auto w-full">
-          <pre className="ascii-divider mb-10 whitespace-pre leading-tight">{`° ˛ ° ˚* _Π_____*☽*˚ ˛
-✩ ˚˛˚*/______/__＼。✩˚ ˚˛ ♡
-˚ ˛˚˛˚｜ 田田｜門｜ ˚ ˚`}</pre>
+          <pre className="ascii-divider mb-10 whitespace-pre leading-tight">{`This website is currently being rebuilt. The information here is randomly generated and may be 
+        inaccurate. Please completely ignore the texts here. For the most up-to-date information, please check my CV, LinkedIn, and GitHub.`}</pre>
           {children ?? <Outlet />}
         </div>
       </main>
