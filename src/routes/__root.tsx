@@ -1,5 +1,4 @@
 import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
-import { UnderDevelopment } from "../components/UnderDevelopment";
 import { ContactProvider } from "@/components/ContactDialog";
 
 import appCss from "../styles.css?url";
@@ -92,9 +91,8 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   return (
-    <RootDocument>
-      <UnderDevelopment /> {/* Add the banner here */}
+    <ContactProvider>
       <Outlet />
-    </RootDocument>
+    </ContactProvider>
   );
 }
