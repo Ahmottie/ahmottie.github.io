@@ -40,23 +40,14 @@ export const Route = createRootRoute({
       { property: "og:title", content: "Bamshi" },
       {
         property: "og:description",
-        content: "Amir's personal website and portfolio.",
+        content: "Amir — Computer Scientist. Software, AI, Data Analysis, Automation.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Bamshi" },
       {
         name: "twitter:description",
-        content: "Amir's personal website and portfolio.",
-      },
-      // Replace the image URL below with your own hosted preview image
-      {
-        property: "og:image",
-        content: "https://your-domain.com/preview-image.png",
-      },
-      {
-        name: "twitter:image",
-        content: "https://your-domain.com/preview-image.png",
+        content: "Amir — Computer Scientist.",
       },
     ],
     links: [

@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteLayout } from "components/SiteLayout";
-import { ContactTrigger } from "components/ContactDialog";
-import logo from "assets/logo.png";
-import memoryGameImg from "assets/memory-game.png";
+import { SiteLayout } from "@/components/SiteLayout";
+import { ContactTrigger } from "@/components/ContactDialog";
+import logo from "@/assets/logo.png";
+import memoryGameImg from "@/assets/memory-game.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({

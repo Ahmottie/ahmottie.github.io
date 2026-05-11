@@ -1,6 +1,6 @@
 import { Link, Outlet, useLocation } from "@tanstack/react-router";
 import type { ReactNode } from "react";
-import { useContact } from "components/ContactDialog";
+import { useContact } from "@/components/ContactDialog";
 
 const nav = [
   { to: "/", label: "₍^. .^₎⟆" },
