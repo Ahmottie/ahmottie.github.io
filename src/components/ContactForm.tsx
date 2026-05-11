@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useContact } from "@/components/ContactDialog";
+import { Turnstile } from "@/components/Turnstile";
 
 const LIMITS = {
   name: 60,
@@ -36,6 +37,8 @@ export function ContactForm() {
   const [honey, setHoney] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
 
@@ -73,7 +76,7 @@ export function ContactForm() {
   const messageChars = message.length;
   const messageOver = messageChars > LIMITS.message;
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
     if (honey.trim() !== "") return;
@@ -84,17 +87,40 @@ export function ContactForm() {
     if (!validEmail(email.trim())) return setError("a valid email is required.");
     if (!message.trim()) return setError("message can't be empty.");
     if (messageOver) return setError(`message is too long (max ${LIMITS.message} characters).`);
+    if (!captchaToken) return setError("please complete the captcha.");
 
-    const fullName = `${prefix ? prefix + " " : ""}${name}`;
-    const subject = title.trim() || `hello from ${fullName}${role ? ` (${role})` : ""}`;
-    const body = `${message}\n\n— ${fullName}${role ? `\n${role}` : ""}\n${email}`;
-    window.location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
-    setTimeout(() => {
-      reset();
-      setSent(false);
-      setOpen(false);
-    }, 600);
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/public/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prefix,
+          name,
+          role,
+          email,
+          title,
+          message,
+          token: captchaToken,
+          website: honey,
+        }),
+      });
+      if (!res.ok) {
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        setSubmitting(false);
+        return setError(body.error || `something went wrong (${res.status}).`);
+      }
+      setSent(true);
+      setSubmitting(false);
+      setTimeout(() => {
+        reset();
+        setSent(false);
+        setOpen(false);
+      }, 1500);
+    } catch (err) {
+      setSubmitting(false);
+      setError("network error — please try again. you can also email " + EMAIL);
+    }
   }
 
   return (
@@ -126,10 +152,8 @@ export function ContactForm() {
               <option value="Mr.">Mr.</option>
               <option value="Ms.">Ms.</option>
               <option value="Mrs.">Mrs.</option>
-              <option value="Mx.">Mx.</option>
               <option value="Dr.">Dr.</option>
               <option value="Prof.">Prof.</option>
-              <option value="They/Them">They/Them</option>
             </select>
           </Field>
           <Field label="name *">
@@ -200,20 +224,23 @@ export function ContactForm() {
           />
         </label>
 
+        <div>
+          <span className="text-sm text-muted-foreground block mb-2">verify you're human</span>
+          <Turnstile onVerify={setCaptchaToken} />
+        </div>
+
         {error && <p className="text-destructive text-sm">{error}</p>}
         {sent && !error && (
-          <p className="text-accent text-sm">
-            opening your email app… if nothing happens, write me at {EMAIL}.
-          </p>
+          <p className="text-accent text-sm">message sent — i'll get back to you soon. ♡</p>
         )}
 
         <div className="flex justify-end">
           <button
             type="submit"
-            disabled={messageOver}
+            disabled={messageOver || submitting || !captchaToken}
             className="border border-border rounded-md px-5 py-2 hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            send →
+            {submitting ? "sending…" : "send →"}
           </button>
         </div>
       </form>

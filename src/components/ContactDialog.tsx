@@ -83,20 +83,7 @@ export function ContactProvider({ children }: { children: ReactNode }) {
 function ContactWindow() {
   const { dock, setDock, hasDraft, reset } = useContact();
 
-  if (dock === "closed") return null;
-
-  if (dock === "minimized") {
-    return (
-      <button
-        type="button"
-        onClick={() => setDock("right")}
-        className="fixed bottom-6 left-6 z-50 border border-border bg-card px-4 py-2 rounded-md shadow-lg hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors text-sm flex items-center gap-2"
-        style={{ fontFamily: "var(--font-pixel)", fontSize: "1.1rem" }}
-      >
-        ✉ message{hasDraft ? " •" : ""}
-      </button>
-    );
-  }
+  if (dock === "closed" || dock === "minimized") return null;
 
   // positioning: side docks pin to that edge, center floats
   const positionClass =

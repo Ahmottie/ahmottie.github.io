@@ -2,6 +2,7 @@ import { Outlet, Link, createRootRoute, HeadContent, Scripts } from "@tanstack/r
 import { ContactProvider } from "@/components/ContactDialog";
 
 import appCss from "../styles.css?url";
+import logoUrl from "@/assets/logo.png";
 
 function NotFoundComponent() {
   return (
@@ -30,44 +31,37 @@ export const Route = createRootRoute({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: "Bamshi" },
       {
         name: "description",
-        content:
-          "My Digio Makeover creates personalized portfolio websites from existing templates.",
+        content: "Amir's personal website.",
       },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
+      { name: "author", content: "Amir" },
+      { property: "og:title", content: "Bamshi" },
       {
         property: "og:description",
-        content:
-          "My Digio Makeover creates personalized portfolio websites from existing templates.",
+        content: "Amir's personal website and portfolio.",
       },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Bamshi" },
       {
         name: "twitter:description",
-        content:
-          "My Digio Makeover creates personalized portfolio websites from existing templates.",
+        content: "Amir's personal website and portfolio.",
       },
+      // Replace the image URL below with your own hosted preview image
       {
         property: "og:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b3035c82-7d23-435b-a0b9-1c4fd05d078a/id-preview-79f438a1--ddcb2456-81d1-40c7-bb53-c292709af5e8.lovable.app-1778077034874.png",
+        content: "https://your-domain.com/preview-image.png",
       },
       {
         name: "twitter:image",
-        content:
-          "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b3035c82-7d23-435b-a0b9-1c4fd05d078a/id-preview-79f438a1--ddcb2456-81d1-40c7-bb53-c292709af5e8.lovable.app-1778077034874.png",
+        content: "https://your-domain.com/preview-image.png",
       },
     ],
     links: [
-      {
-        rel: "stylesheet",
-        href: appCss,
-      },
+      { rel: "stylesheet", href: appCss },
+      { rel: "icon", type: "image/png", href: logoUrl },
     ],
   }),
   shellComponent: RootShell,

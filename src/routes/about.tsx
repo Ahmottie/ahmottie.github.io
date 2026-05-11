@@ -20,7 +20,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <SiteLayout>
-      <h1 className="text-3xl mb-6">{"> About"}</h1>
+      <h1 className="text-3xl mb-6">About me</h1>
       <div className="grid md:grid-cols-3 gap-5">
         <div className="pixel-card md:col-span-2 space-y-4 leading-relaxed">
           <p>I'm a developer focused on Software Engineering, AI, Data Analysis, and Automation.</p>
@@ -32,7 +32,7 @@ function About() {
         </div>
         <div className="space-y-5">
           <div className="pixel-card">
-            <div className="pixel-tag mb-3">topics</div>
+            <div className="pixel-tag mb-3">Topics</div>
             <ul className="space-y-1 text-muted-foreground">
               <li>· Software Engineering</li>
               <li>· AI</li>
@@ -41,7 +41,7 @@ function About() {
             </ul>
           </div>
           <div className="pixel-card">
-            <div className="pixel-tag mb-3">loves</div>
+            <div className="pixel-tag mb-3">Loves</div>
             <ul className="space-y-1 text-muted-foreground">
               <li>♡ clean code</li>
               <li>♡ open source</li>
