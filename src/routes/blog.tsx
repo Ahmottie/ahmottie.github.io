@@ -18,20 +18,9 @@ const posts = [
     slug: "hello-world",
     title: "hello world",
     date: "2026-05-01",
-    excerpt: "First post in the new blog — why I rebuilt everything.",
+    excerpt: "First post in the new blog.",
   },
-  {
-    slug: "design-tools",
-    title: "tools I love",
-    date: "2026-04-12",
-    excerpt: "A short list of small tools that make a big difference.",
-  },
-  {
-    slug: "slow-web",
-    title: "in praise of the slow web",
-    date: "2026-03-02",
-    excerpt: "Why I think the web is best when it's calm and a little weird.",
-  },
+
 ];
 
 function Blog() {

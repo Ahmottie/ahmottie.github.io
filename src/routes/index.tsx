@@ -2,21 +2,34 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { ContactTrigger } from "@/components/ContactDialog";
 import logo from "@/assets/logo.png";
-import memoryGameImg from "@/assets/memory-game.png";
+// Socials icons
+import githubSocialIcon from "@/assets/social-icons/GitHub_Invertocat_White.svg";
+import linkedinSocialIcon from "@/assets/social-icons/InBug-White.png";
+// Icons
+import htmlIcon from "@/assets/skill-icons/html5.svg";
+import cssIcon from "@/assets/skill-icons/css.svg";
+import jsIcon from "@/assets/skill-icons/javascript.svg";
+import tsIcon from "@/assets/skill-icons/typescript.svg";
+import pythonIcon from "@/assets/skill-icons/python.svg";
+import rIcon from "@/assets/skill-icons/r.svg";
+import javaIcon from "@/assets/skill-icons/Duke_Java.svg";
+import nextflowIcon from "@/assets/skill-icons/nextflow.svg";
+// Project images
+import memoryGameImg from "@/assets/project-pics/memory-game.png";
+import websiteImg from "@/assets/project-pics/website-head.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Bamshi" },
+      { title: "Bamshi.dev" },
       {
         name: "description",
-        content:
-          "Hey there, I'm still updating my website. For now you can check out my CV, LinkedIn profile, and GitHub for more information.",
+        content: "I forgot what's this part for lol",
       },
-      { property: "og:title", content: "Amir — Computer Scientist" },
+      { property: "og:title", content: "Amir Hossein Mottie — Computer Scientist" },
       {
         property: "og:description",
-        content: "Hey there, I'm Amir — a passionate Computer Scientist.",
+        content: "Hi, I'm Amir Hossein Mottie — computer scientist and guitarist.",
       },
     ],
   }),
@@ -28,32 +41,46 @@ const GITHUB_URL = "https://github.com/Ahmottie";
 const LINKEDIN_URL = "https://www.linkedin.com/in/amirhossein-mottie-108798324/";
 
 const skills = [
-  { name: "Python", slug: "python" },
-  { name: "Java", slug: "openjdk" },
-  { name: "R", slug: "r" },
-  { name: "JavaScript", slug: "javascript" },
-  { name: "TypeScript", slug: "typescript" },
-  { name: "CSS", slug: "css3" },
-  { name: "HTML", slug: "html5" },
+  { name: "Python", icon: pythonIcon },
+  { name: "Java", icon: javaIcon },
+  { name: "R", icon: rIcon },
+  { name: "JavaScript", icon: jsIcon },
+  { name: "TypeScript", icon: tsIcon },
+  { name: "CSS", icon: cssIcon },
+  { name: "HTML", icon: htmlIcon },
+  { name: "Nextflow", icon: nextflowIcon },
 ];
 
 const highlighted = [
   {
     slug: "memory-game",
     name: "Coffee Break Games: Memory Game",
-    desc: "Retro 2D memory matching game built with a focus on game logic and requirement engineering.",
+    desc: "Retro 2D memory matching game. Part of my master's Software Engineering project.",
     repo: "https://github.com/Ahmottie/Coffee-Break-Games---Memory-Game",
     live: null as string | null,
     image: memoryGameImg,
     tags: ["Java", "Game Development", "Requirement Engineering", "Project Management", "Git"],
   },
   {
-    slug: "bamshi-website",
     name: "Bamshi.dev — Personal Website",
-    desc: "My personal portfolio and blog. Built with TanStack Start, React, TypeScript, and Tailwind.",
+    tag: "Web Design",
+    desc: (
+      <>
+        My personal portfolio and blog. Built with TanStack Start, React, TypeScript, and Tailwind.
+        The theme is influenced by{" "}
+        <a
+          href="https://github.com/danapixels/digio-theme"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-accent transition-colors"
+        >
+          digio-theme
+        </a>
+      </>
+    ),
     repo: "https://github.com/Ahmottie/ahmottie.github.io",
+    image: websiteImg,
     live: "https://bamshi.dev",
-    image: null,
     tags: ["Web Design", "TypeScript", "React", "Tailwind", "Git"],
   },
 ];
@@ -62,12 +89,7 @@ const writings = [
   {
     slug: "hello-world",
     title: "hello world",
-    excerpt: "First post in the new blog — why I rebuilt everything.",
-  },
-  {
-    slug: "design-tools",
-    title: "tools I love",
-    excerpt: "A short list of small tools that make a big difference.",
+    excerpt: "First post in the new blog.",
   },
 ];
 
@@ -79,9 +101,9 @@ const writings = [
 
 type TimelineEntry = {
   kind: "education" | "work";
-  startDate: string;   // "YYYY-MM-DD"
+  startDate: string; // "YYYY-MM-DD"
   endDate: string | null; // null = current/ongoing
-  period: string;      // human-readable label shown inside the card
+  period: string; // human-readable label shown inside the card
   title: string;
   place: string;
   bullets?: string[];
@@ -103,13 +125,6 @@ const timelineEntries: TimelineEntry[] = [
     period: "02/01/2026 — 31/05/2026",
     title: "University Student Research Assistant",
     place: "RPTU, Department of Biology · Kaiserslautern, Germany",
-    bullets: [
-      "Software engineering and bioinformatics using R and R libraries",
-      "Developing proteomics pipeline",
-      "Data visualisation and analysis",
-      "Debugging and optimising code",
-      "Modular and functional programming",
-    ],
   },
   {
     kind: "education",
@@ -126,13 +141,6 @@ const timelineEntries: TimelineEntry[] = [
     period: "31/01/2024 — 30/04/2024",
     title: "Teaching Assistant, Advanced Programming",
     place: "University of Mazandaran · Babolsar, Iran",
-    bullets: [
-      "Teaching functional and object-oriented programming",
-      "Software and game development",
-      "Basics of data structures",
-      "Creating lecture materials and exercises",
-      "Supervising students and examination",
-    ],
   },
   {
     kind: "work",
@@ -141,20 +149,14 @@ const timelineEntries: TimelineEntry[] = [
     period: "31/08/2023 — 31/12/2023",
     title: "Teaching Assistant, Artificial Intelligence",
     place: "University of Mazandaran · Babolsar, Iran",
-    bullets: [
-      "Teaching programming searches, heuristics, AI algorithms and mathematics",
-      "Basics of Scikit-learn",
-      "Creating exercise materials",
-      "Supervising students, project management and examination",
-    ],
   },
 ];
 
 // Sort by start date descending (most recent first)
-function parseDate(d: string) { return new Date(d).getTime(); }
-const sorted = [...timelineEntries].sort(
-  (a, b) => parseDate(b.startDate) - parseDate(a.startDate),
-);
+function parseDate(d: string) {
+  return new Date(d).getTime();
+}
+const sorted = [...timelineEntries].sort((a, b) => parseDate(b.startDate) - parseDate(a.startDate));
 
 // Group overlapping entries into "rows" so they render side-by-side.
 // Two entries overlap when one starts before the other ends.
@@ -201,10 +203,10 @@ function Index() {
           className="leading-none tracking-tight"
           style={{ fontFamily: "var(--font-pixel)", fontSize: "clamp(4rem, 14vw, 10rem)" }}
         >
-          Amir
+          Amir Hossein Mottie
         </h1>
         <p className="text-muted-foreground mt-2 text-lg">
-          Computer Scientist · Software · AI · Automation
+          Computer Scientist · Software Engineer · Data Analyst
         </p>
       </section>
 
@@ -223,21 +225,22 @@ function Index() {
                 style={{ fontFamily: "var(--font-pixel)", fontSize: "1.3rem" }}
               >
                 <div className="text-muted-foreground">name:</div>
-                <div>Amir</div>
+                <div>Amirhossein Mottie</div>
               </div>
               <div
                 className="border border-border rounded-sm px-2 py-1"
                 style={{ fontFamily: "var(--font-pixel)", fontSize: "1.3rem" }}
               >
                 <div className="text-muted-foreground">role:</div>
-                <div>Computer Scientist</div>
+                <div>Student</div>
               </div>
             </div>
           </div>
           <p className="leading-relaxed">
-            <strong>Hey there, I'm Amir</strong> — a passionate Computer Scientist. I work across
-            Software Engineering, AI, Data Analysis, and Automation, and I enjoy solving complex
-            problems. <span className="blink" />
+            <strong>Hey there, I'm Amir (You can call me Amir or Amir Hossein) </strong> — Computer
+            Scientist and Guitarist. I study computer science specialised in Software Engineering,
+            AI, and Data Analysis. I enjoy solving complex problems and doing projects.{" "}
+            <span className="blink" />
           </p>
           <div className="flex flex-wrap gap-3 mt-5">
             <ContactTrigger>
@@ -259,7 +262,7 @@ function Index() {
               rel="noopener noreferrer"
               className="border border-border rounded-sm px-4 py-2 no-underline hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors click-area inline-flex items-center gap-2"
             >
-              <img src="https://cdn.simpleicons.org/github/ffffff" alt="GitHub" className="w-4 h-4" />
+              <img src={githubSocialIcon} alt="GitHub" className="w-5 h-5 object-contain" />
               GitHub
             </a>
             <a
@@ -268,7 +271,7 @@ function Index() {
               rel="noopener noreferrer"
               className="border border-border rounded-sm px-4 py-2 no-underline hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors click-area inline-flex items-center gap-2"
             >
-              <img src="https://cdn.simpleicons.org/linkedin" alt="LinkedIn" className="w-4 h-4" />
+              <img src={linkedinSocialIcon} alt="LinkedIn" className="w-5 h-5 object-contain" />
               LinkedIn
             </a>
           </div>
@@ -278,16 +281,16 @@ function Index() {
           <div className="pixel-tag mb-3">Focus</div>
           <ul className="space-y-1 text-muted-foreground">
             <li>· Software Engineering</li>
-            <li>· AI</li>
+            <li>· AI and Data Science</li>
             <li>· Data Analysis</li>
-            <li>· Automation</li>
           </ul>
         </div>
 
         <div className="pixel-card">
           <div className="pixel-tag mb-3">Status</div>
           <p className="text-muted-foreground">
-            Currently building things, breaking things, and learning something new every week.
+            Currently looking for jobs, building projects, and learning new things in Java and
+            JavaScript.
           </p>
         </div>
       </div>
@@ -297,17 +300,34 @@ function Index() {
         <span className="pixel-tag text-accent">Skills</span>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
-        {skills.map((s) => (
-          <div key={s.name} className="pixel-card flex items-center gap-3">
-            <img
-              src={`https://cdn.simpleicons.org/${s.slug}`}
-              alt={`${s.name} logo`}
-              className="w-8 h-8 shrink-0"
-              loading="lazy"
-            />
-            <span style={{ fontFamily: "var(--font-pixel)", fontSize: "1.4rem" }}>{s.name}</span>
-          </div>
-        ))}
+        {skills.map((s) => {
+          const isJava = s.name === "Java";
+
+          return (
+            <div key={s.name} className="pixel-card flex items-center gap-3">
+              {isJava ? (
+                <div className="bg-white p-1.5 rounded-sm flex items-center justify-center w-10 h-10 shrink-0">
+                  <img
+                    src={s.icon}
+                    alt={`${s.name} logo`}
+                    className="w-full h-full object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ) : (
+                <img
+                  src={s.icon}
+                  alt={`${s.name} logo`}
+                  className="w-8 h-8 shrink-0 object-contain"
+                  loading="lazy"
+                  style={{ filter: "brightness(0) invert(1)" }}
+                />
+              )}
+
+              <span style={{ fontFamily: "var(--font-pixel)", fontSize: "1.4rem" }}>{s.name}</span>
+            </div>
+          );
+        })}
       </div>
 
       {/* ── Journey (Timeline) ── */}
@@ -327,7 +347,8 @@ function Index() {
               <img
                 src={p.image}
                 alt={`${p.name} screenshot`}
-                className="w-full h-44 object-cover rounded-sm mb-3 border border-border"
+                /* Changed h-44 to h-auto and object-cover to object-contain */
+                className="w-full h-auto object-contain rounded-sm mb-3 border border-border"
                 loading="lazy"
               />
             )}
@@ -414,9 +435,7 @@ function Timeline({ rows }: { rows: TimelineRow[] }) {
         <span className="inline-flex items-center gap-2">
           <span className="w-2.5 h-2.5 rounded-sm border-2 border-accent" /> Work
         </span>
-        <span className="inline-flex items-center gap-2 text-accent">
-          ← side-by-side = concurrent
-        </span>
+        <span className="inline-flex items-center gap-2 text-accent"></span>
       </div>
 
       {rows.map((row, rowIdx) => (
@@ -445,23 +464,20 @@ function TimelineCard({ entry }: { entry: TimelineEntry }) {
       <div className="flex items-start justify-between gap-3 mb-2 flex-wrap">
         <span
           className={`pixel-tag text-xs ${isEducation ? "text-accent" : "text-muted-foreground"}`}
-          style={{ fontSize: "0.8rem" }}
+          style={{ fontSize: "1.3rem" }}
         >
           {isEducation ? "education" : "work"}
         </span>
         <span
           className="text-muted-foreground"
-          style={{ fontFamily: "var(--font-pixel)", fontSize: "1.1rem" }}
+          style={{ fontFamily: "var(--font-pixel)", fontSize: "1.5rem" }}
         >
           {entry.period}
         </span>
       </div>
 
       {/* Title */}
-      <div
-        className="mb-1"
-        style={{ fontFamily: "var(--font-pixel)", fontSize: "1.3rem" }}
-      >
+      <div className="mb-1" style={{ fontFamily: "var(--font-pixel)", fontSize: "1.5rem" }}>
         {entry.title}
       </div>
 

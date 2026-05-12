@@ -126,9 +126,7 @@ export function ContactForm() {
   return (
     <section className="mt-2">
       <h2 className="text-2xl mb-1">send a message</h2>
-      <p className="text-muted-foreground mb-5 text-sm">
-        a quick note — i read everything. drafts persist if you minimize.
-      </p>
+      <p className="text-muted-foreground mb-5 text-sm">I read everything.</p>
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
         <input
           type="text"
@@ -150,7 +148,6 @@ export function ContactForm() {
             >
               <option value="">—</option>
               <option value="Mr.">Mr.</option>
-              <option value="Ms.">Ms.</option>
               <option value="Mrs.">Mrs.</option>
               <option value="Dr.">Dr.</option>
               <option value="Prof.">Prof.</option>

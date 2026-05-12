@@ -2,12 +2,15 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Mail } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
 import { ContactForm } from "@/components/ContactForm";
+// Social Icons
+import githubSocialIcon from "@/assets/social-icons/GitHub_Invertocat_White.svg";
+import linkedinSocialIcon from "@/assets/social-icons/InBug-White.png";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "contacts — Amir" },
-      { name: "description", content: "Reach out to Amir via LinkedIn, GitHub, or email." },
+      { name: "description", content: "Reach out to me via LinkedIn, GitHub, or email." },
       { property: "og:title", content: "contacts — Amir" },
       { property: "og:description", content: "Reach out via LinkedIn, GitHub, or email." },
     ],
@@ -16,8 +19,16 @@ export const Route = createFileRoute("/contact")({
 });
 
 const links = [
-  { label: "GitHub", logo: "https://cdn.simpleicons.org/github/ffffff", href: "https://github.com/Ahmottie" },
-  { label: "LinkedIn", logo: "https://cdn.simpleicons.org/linkedin", href: "https://www.linkedin.com/in/amirhossein-mottie-108798324/" },
+  {
+    label: "GitHub",
+    logo: githubSocialIcon,
+    href: "https://github.com/Ahmottie",
+  },
+  {
+    label: "LinkedIn",
+    logo: linkedinSocialIcon,
+    href: "https://www.linkedin.com/in/amirhossein-mottie-108798324/",
+  },
   { label: "Email", logo: null, href: "mailto:hello@bamshi.dev" },
 ];
 
@@ -27,8 +38,8 @@ function Contact() {
       <h1 className="text-3xl mb-6">Say hi</h1>
       <div className="pixel-card space-y-5">
         <p className="leading-relaxed">
-          Want to chat about software, AI, or a project idea? Pick your favorite way to reach out —
-          I'd love to hear from you.
+          Want to get in touch? I'm always open. Feel free to reach out via email, LinkedIn, or
+          GitHub.
         </p>
         <div className="grid sm:grid-cols-3 gap-3">
           {links.map((l) => (

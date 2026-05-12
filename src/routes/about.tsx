@@ -7,8 +7,7 @@ export const Route = createFileRoute("/about")({
       { title: "about — Amir" },
       {
         name: "description",
-        content:
-          "Hey there, I'm still updating my website. For now you can check out my CV, LinkedIn profile, and GitHub for more information.",
+        content: "This is my about page.",
       },
       { property: "og:title", content: "about — Amir" },
       { property: "og:description", content: "About Amir — a passionate Computer Scientist." },
@@ -23,30 +22,33 @@ function About() {
       <h1 className="text-3xl mb-6">About me</h1>
       <div className="grid md:grid-cols-3 gap-5">
         <div className="pixel-card md:col-span-2 space-y-4 leading-relaxed">
-          <p>I'm a developer focused on Software Engineering, AI, Data Analysis, and Automation.</p>
-          <p>I enjoy solving complex problems.</p>
-          <p className="text-muted-foreground">
-            Always curious, always tinkering — whether that's training a model, automating a boring
-            workflow, or shipping a small side project.
+          <p>
+            My name is Amirhossein Mottie and I study Computer Science Master's at RPTU
+            Kaiserslautern.
           </p>
+          <p>I enjoy solving puzzles and problems.</p>
+          <p className="text-muted-foreground">Always looking for new projects and journey.</p>
         </div>
         <div className="space-y-5">
           <div className="pixel-card">
             <div className="pixel-tag mb-3">Topics</div>
             <ul className="space-y-1 text-muted-foreground">
-              <li>· Software Engineering</li>
-              <li>· AI</li>
-              <li>· Data Analysis</li>
-              <li>· Automation</li>
+              <li>· Programming</li>
+              <li>· Computer Science</li>
+              <li>· Tech</li>
+              <li>· Hobbies</li>
             </ul>
           </div>
           <div className="pixel-card">
             <div className="pixel-tag mb-3">Loves</div>
             <ul className="space-y-1 text-muted-foreground">
-              <li>♡ clean code</li>
-              <li>♡ open source</li>
-              <li>♡ hard problems</li>
-              <li>♡ good coffee</li>
+              <li>♡ Cats</li>
+              <li>♡ Playing Guitar</li>
+              <li>♡ Java</li>
+              <li>♡ Linux</li>
+              <li>♡ kaiser Wilhelm II</li>
+              <li>♡ Iranian Tea</li>
+              <li>♡ Anime and Manga</li>
             </ul>
           </div>
         </div>

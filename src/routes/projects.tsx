@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import memoryGameImg from "@/assets/memory-game.png";
+import memoryGameImg from "@/assets/project-pics/memory-game.png";
+import websiteImg from "@/assets/project-pics/website-head.png";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -15,12 +16,12 @@ export const Route = createFileRoute("/projects")({
 });
 
 type Project = {
-  name: string;
-  tag: string;
-  desc: string;
-  repo: string;
-  live?: string;
+  desc: React.ReactNode;
   image?: string;
+  live?: string;
+  name: string;
+  repo: string;
+  tag: string;
   tags: string[];
 };
 
@@ -28,7 +29,7 @@ const projects: Project[] = [
   {
     name: "Coffee Break Games: Memory Game",
     tag: "Software Development",
-    desc: "Retro 2D memory matching game. Built with a focus on game logic, pattern designs, and Requirement Engineering.",
+    desc: "Retro 2D memory matching game. Part of my master's Software Engineering project.",
     repo: "https://github.com/Ahmottie/Coffee-Break-Games---Memory-Game",
     image: memoryGameImg,
     tags: ["Java", "Game Development", "Requirement Engineering", "Project Management", "Git"],
@@ -36,8 +37,22 @@ const projects: Project[] = [
   {
     name: "Bamshi.dev — Personal Website",
     tag: "Web Design",
-    desc: "My personal portfolio and blog. Built with TanStack Start, React, TypeScript, and Tailwind.",
+    desc: (
+      <>
+        My personal portfolio and blog. Built with TanStack Start, React, TypeScript, and Tailwind.
+        The theme is influenced by{" "}
+        <a
+          href="https://github.com/danapixels/digio-theme"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-accent transition-colors"
+        >
+          digio-theme
+        </a>
+      </>
+    ),
     repo: "https://github.com/Ahmottie/ahmottie.github.io",
+    image: websiteImg,
     live: "https://bamshi.dev",
     tags: ["Web Design", "TypeScript", "React", "Tailwind", "Git"],
   },
@@ -54,7 +69,7 @@ function Projects() {
               <img
                 src={p.image}
                 alt={`${p.name} screenshot`}
-                className="w-full h-48 object-cover rounded-sm mb-3 border border-border"
+                className="w-full h-auto object-contain rounded-sm mb-3 border border-border"
                 loading="lazy"
               />
             )}
