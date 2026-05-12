@@ -5,8 +5,6 @@ import { Turnstile } from "@/components/Turnstile";
 const LIMITS = {
   name: 60,
   role: 80,
-  emailLocal: 64,
-  emailDomain: 255,
   emailTotal: 254,
   title: 120,
   message: 500,
@@ -39,21 +37,20 @@ export function ContactForm() {
   const [sent, setSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
+  const [resetKey, setResetKey] = useState(0); // Added for Turnstile reset
   const [toast, setToast] = useState<string | null>(null);
   const toastTimer = useRef<number | null>(null);
 
   function flash(msg: string) {
     setToast(msg);
     if (toastTimer.current) window.clearTimeout(toastTimer.current);
-    toastTimer.current = window.setTimeout(() => setToast(null), 2000);
+    toastTimer.current = window.setTimeout(() => setToast(null), 3000);
   }
 
-  useEffect(
-    () => () => {
-      if (toastTimer.current) window.clearTimeout(toastTimer.current);
-    },
-    [],
-  );
+  function handleReset() {
+    setCaptchaToken("");
+    setResetKey((prev) => prev + 1); // Triggers the Turnstile.tsx reset logic
+  }
 
   function clamp(setter: (v: string) => void, max: number, label: string) {
     return (v: string) => {
@@ -66,30 +63,24 @@ export function ContactForm() {
     };
   }
 
-  function validEmail(e: string) {
-    if (e.length > LIMITS.emailTotal) return false;
-    const m = e.match(/^([^\s@]+)@([^\s@]+\.[^\s@]+)$/);
-    if (!m) return false;
-    return m[1].length <= LIMITS.emailLocal && m[2].length <= LIMITS.emailDomain;
-  }
-
-  const messageChars = message.length;
-  const messageOver = messageChars > LIMITS.message;
-
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
+
+    // 1. Bot & Timing Checks
     if (honey.trim() !== "") return;
     if (Date.now() - mountedAt.current < MIN_TIME_MS) {
-      return setError("hold on a sec — please take a moment before sending.");
+      return setError("Please take a moment before sending.");
     }
-    if (!name.trim()) return setError("name is required.");
-    if (!validEmail(email.trim())) return setError("a valid email is required.");
-    if (!message.trim()) return setError("message can't be empty.");
-    if (messageOver) return setError(`message is too long (max ${LIMITS.message} characters).`);
-    if (!captchaToken) return setError("please complete the captcha.");
+
+    // 2. Validation
+    if (!name.trim()) return setError("Name is required.");
+    if (!email.includes("@")) return setError("A valid email is required.");
+    if (!message.trim()) return setError("Message can't be empty.");
+    if (!captchaToken) return setError("Please complete the captcha.");
 
     setSubmitting(true);
+
     try {
       const res = await fetch("/api/public/contact", {
         method: "POST",
@@ -102,32 +93,40 @@ export function ContactForm() {
           title,
           message,
           token: captchaToken,
-          website: honey,
+          website: honey, // honeypot
         }),
       });
+
+      const body = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const body = (await res.json().catch(() => ({}))) as { error?: string };
         setSubmitting(false);
-        return setError(body.error || `something went wrong (${res.status}).`);
+        handleReset(); // Reset captcha on failure
+        return setError(body.error || `Error (${res.status}). Please try again.`);
       }
+
+      // 3. Success State
       setSent(true);
       setSubmitting(false);
       setTimeout(() => {
         reset();
         setSent(false);
         setOpen(false);
-      }, 1500);
+      }, 2000);
     } catch (err) {
       setSubmitting(false);
-      setError("network error — please try again. you can also email " + EMAIL);
+      handleReset();
+      setError("Network error. You can also email " + EMAIL);
     }
   }
 
   return (
     <section className="mt-2">
       <h2 className="text-2xl mb-1">send a message</h2>
-      <p className="text-muted-foreground mb-5 text-sm">I read everything.</p>
+      <p className="text-muted-foreground mb-5 text-sm">a quick note — i read everything.</p>
+
       <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+        {/* Honeypot - hidden from users and screen readers */}
         <input
           type="text"
           name="website"
@@ -135,8 +134,7 @@ export function ContactForm() {
           onChange={(e) => setHoney(e.target.value)}
           tabIndex={-1}
           autoComplete="off"
-          aria-hidden="true"
-          style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+          style={{ display: "none" }}
         />
 
         <div className="grid md:grid-cols-[7rem_1fr_1fr] gap-4">
@@ -155,18 +153,15 @@ export function ContactForm() {
           </Field>
           <Field label="name *">
             <input
-              required
               value={name}
-              onChange={(e) => clamp(setName, LIMITS.name, "name")(e.target.value)}
-              maxLength={LIMITS.name}
+              onChange={(e) => clamp(setName, LIMITS.name, "Name")(e.target.value)}
               className={inputClass}
             />
           </Field>
           <Field label="role / company">
             <input
               value={role}
-              onChange={(e) => clamp(setRole, LIMITS.role, "role")(e.target.value)}
-              maxLength={LIMITS.role}
+              onChange={(e) => clamp(setRole, LIMITS.role, "Role")(e.target.value)}
               className={inputClass}
             />
           </Field>
@@ -175,10 +170,8 @@ export function ContactForm() {
         <Field label="email *">
           <input
             type="email"
-            required
             value={email}
-            onChange={(e) => clamp(setEmail, LIMITS.emailTotal, "email")(e.target.value)}
-            maxLength={LIMITS.emailTotal}
+            onChange={(e) => clamp(setEmail, LIMITS.emailTotal, "Email")(e.target.value)}
             className={inputClass}
           />
         </Field>
@@ -186,8 +179,7 @@ export function ContactForm() {
         <Field label="subject">
           <input
             value={title}
-            onChange={(e) => clamp(setTitle, LIMITS.title, "title")(e.target.value)}
-            maxLength={LIMITS.title}
+            onChange={(e) => clamp(setTitle, LIMITS.title, "Subject")(e.target.value)}
             className={inputClass}
             placeholder="subject of your message"
           />
@@ -196,57 +188,41 @@ export function ContactForm() {
         <label className="block">
           <div className="flex justify-between items-baseline">
             <span className="text-sm text-muted-foreground">message *</span>
-            <span
-              className={`text-xs ${messageOver ? "text-destructive" : "text-muted-foreground"}`}
-            >
-              {messageChars} / {LIMITS.message}
+            <span className="text-xs text-muted-foreground">
+              {message.length} / {LIMITS.message}
             </span>
           </div>
           <textarea
-            required
-            rows={6}
+            rows={5}
             value={message}
-            maxLength={LIMITS.message}
-            onChange={(e) => {
-              const v = e.target.value;
-              if (v.length >= LIMITS.message) {
-                setMessage(v.slice(0, LIMITS.message));
-                if (v.length > message.length)
-                  flash(`message reached the ${LIMITS.message} character limit`);
-              } else {
-                setMessage(v);
-              }
-            }}
-            className={`mt-1 ${inputClass} resize-y`}
+            onChange={(e) => clamp(setMessage, LIMITS.message, "Message")(e.target.value)}
+            className={`mt-1 ${inputClass} resize-none`}
           />
         </label>
 
-        <div>
+        <div className="py-2">
           <span className="text-sm text-muted-foreground block mb-2">verify you're human</span>
-          <Turnstile onVerify={setCaptchaToken} />
+          <Turnstile onVerify={setCaptchaToken} resetTrigger={resetKey} />
         </div>
 
-        {error && <p className="text-destructive text-sm">{error}</p>}
-        {sent && !error && (
-          <p className="text-accent text-sm">message sent — i'll get back to you soon. ♡</p>
-        )}
+        <div aria-live="polite">
+          {error && <p className="text-destructive text-sm font-medium">!! {error}</p>}
+          {sent && <p className="text-accent text-sm">message sent successfully. ♡</p>}
+        </div>
 
         <div className="flex justify-end">
           <button
             type="submit"
-            disabled={messageOver || submitting || !captchaToken}
-            className="border border-border rounded-md px-5 py-2 hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={submitting || !captchaToken}
+            className="pixel-card px-6 py-2 hover:bg-accent hover:text-accent-foreground transition-colors disabled:opacity-50"
           >
-            {submitting ? "sending…" : "send →"}
+            {submitting ? "sending..." : "send →"}
           </button>
         </div>
       </form>
 
       {toast && (
-        <div
-          role="status"
-          className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] border border-border bg-card px-4 py-2 rounded-md shadow-lg text-sm"
-        >
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] border border-border bg-card px-4 py-2 rounded-md shadow-lg text-xs animate-in fade-in slide-in-from-bottom-2">
           {toast}
         </div>
       )}
@@ -255,7 +231,7 @@ export function ContactForm() {
 }
 
 const inputClass =
-  "w-full bg-background border border-border rounded-md px-3 py-2 focus:outline-none focus:border-accent";
+  "w-full bg-background border border-border rounded-md px-3 py-2 focus:outline-none focus:border-accent transition-colors";
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
