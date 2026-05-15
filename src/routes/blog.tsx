@@ -18,9 +18,8 @@ const posts = [
     slug: "hello-world",
     title: "hello world",
     date: "2026-05-01",
-    excerpt: "First post in the new blog.",
+    excerpt: "First post in the new blog. This is a Test Post.",
   },
-
 ];
 
 function Blog() {
