@@ -6,9 +6,9 @@ import websiteImg from "@/assets/project-pics/website-head.png";
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "portfolio — Amir" },
+      { title: "Portfolio — Amir" },
       { name: "description", content: "Selected projects and experiments by Amir." },
-      { property: "og:title", content: "portfolio — Amir" },
+      { property: "og:title", content: "Portfolio — Amir" },
       { property: "og:description", content: "Selected projects and experiments." },
     ],
   }),
